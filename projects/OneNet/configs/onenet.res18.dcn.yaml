@@ -1,6 +1,6 @@
 _BASE_: "Base-OneNet.yaml"
 MODEL:
-  WEIGHTS: "torchvision-R-18.pkl"
+  WEIGHTS: "detectron2://ImageNetPretrained/torchvision/R-18.pkl"
   BACKBONE:
       FREEZE_AT: 0
   RESNETS:

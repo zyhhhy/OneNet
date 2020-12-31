@@ -8,7 +8,8 @@ import torch
 
 from detectron2.utils.comm import get_world_size, is_main_process
 from detectron2.utils.logger import log_every_n_seconds
-
+from thop import profile
+import numpy as np
 
 class DatasetEvaluator:
     """
@@ -138,7 +139,15 @@ def inference_on_dataset(model, data_loader, evaluator):
                 total_compute_time = 0
 
             start_compute_time = time.perf_counter()
-            outputs = model(inputs)
+            outputs = model(inputs) # inputs type: list
+            # flops, params = profile(model, inputs=(inputs,))
+            # import pdb;pdb.set_trace()
+            # # print(inputs[0].shape)
+            # # print(type(inputs))
+            # # print(np.array(inputs).shape)
+            # print("flops:", flops/10e5, " M")
+            # print("parameters", params/10e5, " M")
+            # exit()
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
             total_compute_time += time.perf_counter() - start_compute_time

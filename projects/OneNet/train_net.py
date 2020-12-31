@@ -25,7 +25,7 @@ from detectron2.evaluation import COCOEvaluator, verify_results
 from detectron2.solver.build import maybe_add_gradient_clipping
 
 from onenet import OneNetDatasetMapper, add_onenet_config
-
+from thop import profile
 
 class Trainer(DefaultTrainer):
 #     """
